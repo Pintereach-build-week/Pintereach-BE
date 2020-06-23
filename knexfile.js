@@ -30,11 +30,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      database: 'pintereach',
-      user: 'postgres',
-      password: 'GreatDays6617'
-    },
+    connection: pgConnection,
     pool: {
       min: 2,
       max: 10
