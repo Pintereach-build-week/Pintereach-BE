@@ -6,7 +6,8 @@ module.exports = {
     find,
     findById,
     add,
-    remove
+    remove,
+    update
 }
 
 function find() {
@@ -26,4 +27,11 @@ function add(newArticle) {
 
 function remove(id) {
     return db("articles").del().where({id: id});
+}
+
+function update(id, changes) {
+    return db("articles").where({id: id}).update(changes)
+    .then(() => {
+        return changes;
+    })
 }
