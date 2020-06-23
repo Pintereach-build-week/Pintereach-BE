@@ -31,7 +31,17 @@ router.delete("/:id", (req, res) => {
         Articles.remove(req.params.id)
         .then(() => {
         res.status(202).json(article);
-    })
+        })
     })
 })
+
+router.put("/:id", (req, res) => {
+    const id = req.params.id;
+    const changes = req.body;
+    Articles.update(id, changes)
+    .then(updatedArticle => {
+        res.status(200).json({Updates: updatedArticle});
+    })
+})
+
 module.exports = router;

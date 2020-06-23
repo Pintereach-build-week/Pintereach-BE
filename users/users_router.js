@@ -7,6 +7,13 @@ const constants = require("../config/constants.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+router.get("/", (req, res) => {
+    Users.find()
+    .then(users => {
+        res.status(200).json(users)
+    })
+})
+
 
 router.post("/register", (req, res) => {
     const newUser = req.body;

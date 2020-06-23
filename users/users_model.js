@@ -1,10 +1,11 @@
 const knex = require("knex");
 const knexConfig = require('../knexfile.js');
-const db = knex(knexConfig.development);
+const db = knex(knexConfig.production);
 
 module.exports = {
     add,
-    findBy
+    findBy,
+    find
 }
 
 function add(userInfo) {
@@ -15,3 +16,6 @@ function findBy(filter) {
     return db("users").where(filter);
 }
 
+function find() {
+    return db("users");
+}
