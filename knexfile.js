@@ -1,11 +1,11 @@
-// Update with your config settings.
+const pgConnection = process.env.DATABASE_URL || "postgresql://postgres@localhost/pintereach";
 
 module.exports = {
 
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './data/dev.pintereach.db3'
+      filename: './data/pintereach.db3'
     },
     seeds: {
       directory: './data/seeds'
@@ -29,18 +29,21 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: 'pintereach',
+      user: 'postgres',
+      password: 'GreatDays6617'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: "./migrations"
+    },
+    seeds: {
+      directory: "./data/seeds"
     }
   }
 
