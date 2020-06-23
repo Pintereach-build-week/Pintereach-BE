@@ -12,4 +12,8 @@ const usersRouter = require("../users/users_router.js");
 server.use("/articles", articlesRouter);
 server.use("/users", usersRouter);
 
+server.get("/", (req, res) => {
+    res.status(200).json({api: "Welcome to the Pintereach api!"})
+})
+
 module.exports = server;

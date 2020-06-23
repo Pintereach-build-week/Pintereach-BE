@@ -19,7 +19,7 @@ router.post("/register", (req, res) => {
 
         Users.add(newUser)
         .then(user => {
-            res.status(200).json(user);
+            res.status(200).json({user});
         })
         .catch(err => {
             res.status(500).json({message: err.message})
@@ -29,18 +29,28 @@ router.post("/register", (req, res) => {
     }
 })
 
-// router.post("/login", (req, res) => {
-//     const {username, password} = req.body;
+router.post("/login", (req, res) => {
+    const {username, password} = req.body;
 
-//     if (req.body) {
-//         Users.findBy({username: username})
-//         .then(([user]), => {
+    if (req.body) {
+        Users.findBy({username: username})
+        .then(([user]) => {
+            if (user && bcrypt.compareSync(password, user.password)) {
+                const token = createToken(user);
+                res.status(200).json({token, user})
+            } else {
+                res.status(400).json("invalid credentials")
+            }
+        })
+        .catch(err => {
+            res.status(500).json({message: err.message});
+        })
+    } else {
+        res.status(401).json({message: "Please provide valid credentials"})
+    }
+})
 
-//         })
-//     }
-// })
-
-function createToken() {
+function createToken(user) {
     const payload = {
         subject: user.id,
         username: user.username,
