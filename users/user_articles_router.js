@@ -3,15 +3,21 @@ const router = express.Router();
 
 const restricted = require("./restricted_middleware.js");
 const UserArticles = require("./user_articles_model.js");
+const Users = require("./users_model.js")
 
 router.get("/:id", restricted, (req, res) => {
-    const user = req.decodedToken.username;
-    UserArticles.findBy(req.params.id)
-    .then(articles => {
-        res.status(200).json({user, articles});
-    })
-    .catch(err => {
-        res.status(500).json(err.message)
+    
+    Users.findBy({id: req.params.id})
+    .then(([user]) => {
+        let username = user.username;
+        console.log(user.username)
+        UserArticles.findBy(req.params.id)
+        .then(articles => {
+            res.status(200).json({username, articles});
+        })
+        .catch(err => {
+            res.status(500).json(err.message)
+        })
     })
 })
 

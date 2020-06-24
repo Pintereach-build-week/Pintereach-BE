@@ -17,6 +17,16 @@ router.get("/", (req, res) => {
     })
 })
 
+router.get("/:id", (req, res) => {
+    Users.findBy({id: req.params.id})
+    .then(user => {
+        res.status(200).json(user)
+    })
+    .catch(err => {
+        res.json(err.message)
+    })
+})
+
 
 router.post("/register", (req, res) => {
     const newUser = req.body;
@@ -29,7 +39,7 @@ router.post("/register", (req, res) => {
 
         Users.add(newUser)
         .then(user => {
-            res.status(200).json({user});
+            res.status(200).json(newUser);
         })
         .catch(err => {
             res.status(500).json({message: err.message})
