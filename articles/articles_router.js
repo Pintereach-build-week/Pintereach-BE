@@ -11,6 +11,9 @@ router.get("/", (req, res) => {
     .then(articles => {
         res.status(200).json(articles)
     })
+    .catch(err => {
+        res.status(500).json(err.message)
+    })
 })
 
 router.get("/:id", (req, res) => {
