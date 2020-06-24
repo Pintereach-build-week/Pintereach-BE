@@ -28,10 +28,10 @@ router.post("/", restricted, (req, res) => {
     Articles.add(req.body)
     .then(([newArticle]) => {
         Articles.addUserArticle(userId, newArticle);
-        res.status(200).json(newArticle);
+        res.status(200).json({newArticle});
     })
     .catch(err => {
-        res.status(500).json(err.message);
+        res.status(500).json({message: err.message});
     })
 })
 
