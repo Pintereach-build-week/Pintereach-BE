@@ -11,8 +11,10 @@ module.exports = (req, res, next) => {
                 res.status(400).json({Error: "Token is invalid, please try logging in again."})
             } else {
                 req.decodedToken = decodedToken;
+                // console.log(decodedToken);
+                return (req.decodedToken, next())
 
-                next();
+                // next();
             }
         })
     } else {

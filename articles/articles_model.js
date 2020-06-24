@@ -7,7 +7,8 @@ module.exports = {
     findById,
     add,
     remove,
-    update
+    update,
+    addUserArticle
 }
 
 function find() {
@@ -20,8 +21,8 @@ function findById(id) {
 
 function add(newArticle) {
     return db("articles").insert(newArticle)
-    .then(() => {
-        return newArticle
+    .then(article => {
+        return article
     })
 }
 
@@ -33,5 +34,13 @@ function update(id, changes) {
     return db("articles").where({id: id}).update(changes)
     .then(() => {
         return changes;
+    })
+}
+
+//adding article to user_posts
+function addUserArticle(userId, articleId) {
+    return db("user_posts").insert({user_id: userId, article_id: articleId})
+    .then(() => {
+        console.log({userId, articleId})
     })
 }
