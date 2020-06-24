@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 const Articles = require("./articles_model.js");
+const userArticles = require("../users/user_articles_model.js");
+const restricted = require("../users/restricted_middleware.js");
 
 router.get("/", (req, res) => {
     Articles.find()
@@ -18,10 +20,15 @@ router.get("/:id", (req, res) => {
     })
 })
 
-router.post("/", (req, res) => {
+router.post("/", restricted, (req, res) => {
+    const userId = req.decodedToken.subject;
     Articles.add(req.body)
-    .then(newArticle => {
+    .then(([newArticle]) => {
+        Articles.addUserArticle(userId, newArticle);
         res.status(200).json(newArticle);
+    })
+    .catch(err => {
+        res.status(500).json(err.message);
     })
 })
 
