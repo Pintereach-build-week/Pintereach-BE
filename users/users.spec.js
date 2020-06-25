@@ -18,18 +18,18 @@ describe("verify that a token is getting returned on login", () => {
     })
 })
 
-describe("verify that a new user's password is hashed", () => {
-    test("/users", () => {
-        const newUser = {
-            username: "thor",
-            password: "hammer"
-        }
-        return supertest(server)
-        .post("/users/register")
-        .send(newUser)
-        .then(res => {
-            expect(res.body.password).not.toBe("hammer");
-            console.log({hashedPass: res.body.password})
-        })
-    })
-})
+// describe("verify that a new user's password is hashed", () => {
+//     test("/users", () => {
+//         const newUser = {
+//             username: "thor",
+//             password: "hammer"
+//         }
+//         return supertest(server)
+//         .post("/users/register")
+//         .send(newUser)
+//         .then(res => {
+//             expect(res.body.password).not.toBe("hammer");
+//             console.log({hashedPass: res.body.password})
+//         })
+//     })
+// })
