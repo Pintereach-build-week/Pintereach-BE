@@ -18,11 +18,11 @@ describe("/articles_router.js", () => {
 
         test("Should return specified article by id", () => {
             return supertest(server)
-            .get("/articles/4")
+            .get("/articles/1")
             .then(res => {
                 const [{id}] = res.body
                 // console.log(id)
-                expect(id).toBe(4)
+                expect(id).toBe(1)
             })
         })
     })
@@ -66,3 +66,4 @@ describe("/articles_router.js", () => {
 //         })
 //     })
 // })
+})
