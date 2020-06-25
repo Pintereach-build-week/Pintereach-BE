@@ -1,10 +1,11 @@
 const express = require("express");
-
+const cors = require("cors");
 
 const server = express();
 const db = require("../data/dbConfig.js");
 
 server.use(express.json());
+server.use(cors());
 
 const articlesRouter = require("../articles/articles_router.js");
 const usersRouter = require("../users/users_router.js");

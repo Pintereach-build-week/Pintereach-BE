@@ -7,6 +7,7 @@ module.exports = {
     connection: {
       filename: './data/pintereach.db3'
     },
+    useNullAsDefault: true,
     seeds: {
       directory: './data/seeds'
     }
@@ -36,6 +37,7 @@ module.exports = {
     options: {
       schema: "public"
     },
+    useNullAsDefault: true,
     // connection: {
     //   database: 'pintereach',
     //   user:     'postgres',

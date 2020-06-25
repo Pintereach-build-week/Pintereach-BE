@@ -16,7 +16,7 @@ router.get("/:id", restricted, (req, res) => {
             res.status(200).json({username, articles});
         })
         .catch(err => {
-            res.status(500).json(err.message)
+            res.status(500).json({userArticlesError: err.message})
         })
     })
 })
